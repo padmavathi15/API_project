@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Finder</title>
+  <link rel="stylesheet" href="/styles.css">
+
+  
+</head>
+<body>
+    <div class="container">
+
+  <h1>Find a Recipe</h1>
+
+  <form action="/search" method="get">
+    <input type="text" name="query" placeholder="Search for a recipe...">
+    <button type="submit">Search</button>
+  </form>
+ 
+ 
+    <% if (error) { %>
+        <p class="error"><%= error %></p>
+      <% } else if (content && Array.isArray(content)) { %>
+        <div class="recipe-list">
+          <% content.forEach(recipe => { %>
+            <div class="recipe-card">
+              <div class="recipe-image">
+                <img src="<%= recipe.image %>" alt="<%= recipe.title %>">
+                <div class="overlay">
+                  <h3>Ingredients:</h3>
+                  <ul>
+                    <% recipe.ingredients.forEach(ingredient => { %>
+                      <li><%= ingredient %></li>
+                    <% }) %>
+                  </ul>
+                  <p><strong>Preparation:</strong> <%= recipe.instructions %></p>
+                </div>
+              </div>
+              <h2><%= recipe.title %></h2>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+ </div>  
+
+</body>
+</html>
+
+
+  
